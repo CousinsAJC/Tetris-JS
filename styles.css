@@ -2,3 +2,23 @@
     background-color: #222222;
     border: 2px solid #888888;
 }
+
+#start-button, #feedback{
+    background-color: antiquewhite;
+    border-radius: 10px;
+    height: 40px;
+    width:150px;
+    margin: 20px;
+}
+
+#canvas{
+    display:flex;
+    justify-content: center;
+    padding:10px;
+}
+
+#buttons{
+    display:flex;
+    justify-content: center;
+    padding:10px;
+}
