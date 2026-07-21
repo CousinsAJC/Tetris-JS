@@ -1,4 +1,4 @@
-import { blockArray, block, i, j, l, o, s, t, z } from "./blocks.js";
+import { iArray, block, i, j, l, o, s, t, z, generateBlock } from "./blocks.js";
 
 
 // -- Get DOM Elements
@@ -17,12 +17,15 @@ let isRunning = false;
 const blockSize = 20;
 const gridX = 310;
 const gridY = 100;
+const current = generateBlock();
+const next = generateBlock();
 // -- Declare Variables
 
 
 
 // -- Set game speed to ~ 60FPS & start game
 setInterval(gameLoop, 17);
+
 gameLoop();
 // -- Set game speed to ~ 60FPS & start game
 
