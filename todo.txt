@@ -1,4 +1,5 @@
--- allow game controllers to be used via API
+--TODO--
+
 -- function for rotation of pieces
 -- function for falling of pieces
 -- an "up next" location showing the upcoming block
@@ -6,3 +7,10 @@
 -- keep score
 -- function for clearing a line
 -- behavior for blocks after a line clear (falling to lowest available space)
+
+
+
+
+--DONE--
+
+-- allow game controllers to be used via API

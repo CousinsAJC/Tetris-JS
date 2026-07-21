@@ -9,18 +9,41 @@ startButton.addEventListener('click', e=>{
     isRunning = true;
 })
 let isRunning = false;
+// -- Get DOM Elements
+
 
 
 // -- Declare Variables
 const blockSize = 20;
 const gridX = 310;
 const gridY = 100;
+// -- Declare Variables
 
 
 
 // -- Set game speed to ~ 60FPS & start game
 setInterval(gameLoop, 17);
 gameLoop();
+// -- Set game speed to ~ 60FPS & start game
+
+
+// -- Every Frame Update/Draw
+function update(){
+    //testUpdate();
+    let gp = getGamepadInput();
+    inputLogic(gp);
+}
+
+function draw(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    //testDraw();
+    drawGridToCanvas();
+}
+// -- Every Frame Update/Draw
+
+
+
+
 
 
 
@@ -38,15 +61,6 @@ function gameLoop(){
 
 }
 
-function update(){
-    //testUpdate();
-}
-
-function draw(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    //testDraw();
-    drawGridToCanvas();
-}
 
 function printToCenterScreen(text, color){
     context.font = "36px Arial";
@@ -63,6 +77,40 @@ function drawGridToCanvas(){
         }
     }
 }
+
+function getGamepadInput(){
+    const gp = navigator.getGamepads();
+    if (gp[0]){
+        gp.A = gp[0].buttons[0];
+        gp.B = gp[0].buttons[1];
+        gp.X = gp[0].buttons[3];
+        gp.Y = gp[0].buttons[4];
+        gp.LB = gp[0].buttons[6];
+        gp.RB = gp[0].buttons[7];
+        gp.LT = gp[0].axes[3];
+        gp.RT = gp[0].axes[4];
+
+        gp.LS = gp[0].buttons[13];
+        gp.RS = gp[0].buttons[14];
+        gp.SEL = gp[0].buttons[10];
+        gp.START = gp[0].buttons[11];
+
+        gp.LEFTX = gp[0].axes[0];
+        gp.LEFTY = gp[0].axes[1];
+        gp.RIGHTX = gp[0].axes[2];
+        gp.RIGHTY = gp[0].axes[5];
+
+        //console.log(gp.A);
+    }
+    return gp
+}
+
+function inputLogic(gp){
+    if (gp.A.pressed){
+        console.log("A is being pressed");
+    }
+}
+// -- Define Functions
 
 
 
