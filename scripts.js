@@ -1,3 +1,5 @@
+import { blockArray, block, i, j, l, o, s, t, z } from "./blocks.js";
+
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
@@ -11,29 +13,6 @@ let py = 1
 let ps = 1
 
 
-
-
-
-setInterval(gameLoop, 17);
-
-load();
-gameLoop();
-
-
-function gameLoop(){
-    if (isRunning){
-        update();
-        draw();
-    }
-    else {
-        printToCanvas("Press Start to Begin");
-    }
-
-}
-
-function load(){
-    
-}
 
 function update(){
     px = px + ps;
@@ -54,3 +33,24 @@ function printToCanvas(text){
     context.fillText(text, canvas.width/2, canvas.height/2);
 }
 
+
+// ------------------------
+
+setInterval(gameLoop, 17);
+
+gameLoop();
+
+// ------------------------
+
+
+
+function gameLoop(){
+    if (isRunning){
+        update();
+        draw();
+    }
+    else {
+        printToCanvas("Press Start to Begin");
+    }
+
+}
