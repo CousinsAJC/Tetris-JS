@@ -7,33 +7,15 @@ class PlayState extends BaseState {
     }
 
     update(){
-        processPlayStateInput();
+        current.update();
     }
 
     draw(){
         drawGridToCanvas();
-        drawCurrentBlock(current);
+        current.draw();
     }
 }
 
-function drawCurrentBlock(current){
-    context.fillStyle = current.color;
-    context.fillRect(current.x + current.coords[0]*blockSize, current.y + current.coords[1]*blockSize, blockSize, blockSize);
-    context.fillRect(current.x + current.coords[2]*blockSize, current.y + current.coords[3]*blockSize, blockSize, blockSize);
-    context.fillRect(current.x + current.coords[4]*blockSize, current.y + current.coords[5]*blockSize, blockSize, blockSize);
-    context.fillRect(current.x + current.coords[6]*blockSize, current.y + current.coords[7]*blockSize, blockSize, blockSize);
-    console.log("drawing current block");
-}
-
-
-function processPlayStateInput(){
-    if (myKeys.includes('a')){
-        current.rotateLeft();
-    }
-    if (myKeys.includes('d')){
-        current.rotateRight();
-    }
-}
 
 
 export { PlayState };

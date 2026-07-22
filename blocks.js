@@ -1,4 +1,4 @@
-import { blockSize, context, gridWidth, gridLeft, gridTop } from "./scripts.js";
+import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys } from "./scripts.js";
 
 class block {
     constructor(){
@@ -8,6 +8,28 @@ class block {
         this.pos3 = {};
         this.pos4 = {};
     }
+
+    update(){
+        if (myKeys.includes('a')){
+            this.rotateLeft();
+        }
+        if (myKeys.includes('d')){
+            this.rotateRight();
+        }
+    }
+
+    draw(){
+        context.fillStyle = this.color;
+        context.fillRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize);
+        context.fillRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize);
+        context.fillRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize);
+        context.fillRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize);
+        //console.log("drawing current block");
+    }
+
+
+    
+
     rotateRight(){
         if (this.pos == 1) {
             this.pos = 2;
@@ -38,9 +60,6 @@ class block {
             this.pos = 3;
             this.coords = this.pos3;
         }
-    }
-    draw(){
-
     }
 }
 
