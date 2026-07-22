@@ -1,4 +1,4 @@
-import { iArray, block, i, j, l, o, s, t, z, generateBlock } from "./blocks.js";
+import { i, j, l, o, s, t, z, generateBlock } from "./blocks.js";
 
 
 // -- Get DOM Elements
@@ -109,9 +109,12 @@ function getGamepadInput(){
 }
 
 function inputLogic(gp){
-    if (gp.A.pressed){
-        console.log("A is being pressed");
+    if (gp[0]){
+        if (gp.A.pressed){
+            console.log("A is being pressed");
+        }
     }
+
 }
 // -- Define Functions
 
