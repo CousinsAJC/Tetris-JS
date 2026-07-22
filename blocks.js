@@ -1,70 +1,144 @@
-class i {
+import { blockSize, context, gridWidth, gridLeft, gridTop } from "./scripts.js";
+
+class block {
     constructor(){
-        this.pos1 = [2, 0, 2, 1, 2, 2, 2, 3];
-        this.pos2 = [2, 0, 2, 1, 2, 2, 2, 3];
-        this.pos3 = [2, 0, 2, 1, 2, 2, 2, 3];
-        this.pos4 = [2, 0, 2, 1, 2, 2, 2, 3];
-        this.color = "cyan";
+        this.pos = 1;
+        this.pos1 = {};
+        this.pos2 = {};
+        this.pos3 = {};
+        this.pos4 = {};
+    }
+    rotateRight(){
+        if (this.pos == 1) {
+            this.pos = 2;
+            this.coords = this.pos2;
+        } else if (this.pos == 2) {
+            this.pos = 3;
+            this.coords = this.pos3;
+        } else if (this.pos == 3) {
+            this.pos = 4;
+            this.coords = this.pos4;
+        } else if (this.pos == 4) {
+            this.pos = 1;
+            this.coords = this.pos1;
+        }
+    }
+
+    rotateLeft(){
+        if (this.pos == 1) {
+            this.pos = 4;
+            this.coords = this.pos4;
+        } else if (this.pos == 2) {
+            this.pos = 1;
+            this.coords = this.pos1;
+        } else if (this.pos == 3) {
+            this.pos = 2;
+            this.coords = this.pos2;
+        } else if (this.pos == 4) {
+            this.pos = 3;
+            this.coords = this.pos3;
+        }
+    }
+    draw(){
+
     }
 }
 
-class j {
+class i extends block {
     constructor(){
+        super(block);
+        this.pos1 = [0, 2, 1, 2, 2, 2, 3, 2];
+        this.pos2 = [2, 0, 2, 1, 2, 2, 2, 3];
+        this.pos3 = [0, 2, 1, 2, 2, 2, 3, 2];
+        this.pos4 = [2, 0, 2, 1, 2, 2, 2, 3];
+        this.color = "cyan";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize * 2;
+    }
+}
+
+class j extends block {
+    constructor(){
+        super(block);
         this.pos1 = [1, 0, 1, 1, 1, 2, 2, 2];
         this.pos2 = [2, 0, 2, 1, 1, 1, 1, 0];
         this.pos3 = [0, 0, 0, 1, 1, 1, 2, 1];
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
         this.color = "blue";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop;
     }
 }
 
-class l {
+class l extends block {
     constructor(){
+        super(block);
         this.pos1 = [0, 1, 1, 1, 2, 1, 0, 2];
         this.pos2 = [0, 0, 1, 0, 1, 1, 1, 2];
         this.pos3 = [0, 1, 1, 1, 2, 1, 2, 0];
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 2];
         this.color = "orange";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 
-class o {
+class o extends block {
     constructor(){
+        super(block);
         this.pos1 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.pos2 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.pos3 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.pos4 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.color = "yellow";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 
-class s {
+class s extends block {
     constructor(){
+        super(block);
         this.pos1 = [0, 2, 1, 2, 1, 1, 2, 1];
         this.pos2 = [1, 0, 1, 1, 2, 1, 2, 2];
         this.pos3 = [0, 2, 1, 2, 1, 1, 2, 1];
         this.pos4 = [1, 0, 1, 1, 2, 1, 2, 2];
         this.color = "green";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 
-class t {
+class t extends block {
     constructor(){
+        super(block);
         this.pos1 = [0, 1, 1, 1, 2, 1, 1, 2];
         this.pos2 = [0, 1, 1, 1, 1, 0, 1, 2];
         this.pos3 = [1, 0, 0, 1, 1, 1, 2, 1];
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 1];
         this.color = "purple";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 
-class z {
+class z extends block {
     constructor(){
+        super(block);
         this.pos1 = [0, 1, 1, 1, 1, 2, 2, 2];
         this.pos2 = [2, 0, 2, 1, 1, 1, 1, 2];
         this.pos3 = [0, 1, 1, 1, 1, 2, 2, 2];
         this.pos4 = [2, 0, 2, 1, 1, 1, 1, 2];
         this.color = "red";
+        this.coords = this.pos1
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 

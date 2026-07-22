@@ -1,5 +1,8 @@
 --TODO--
-
+-- create splash screen when loading game
+    --start new game
+    --options
+    --high score?
 -- function for rotation of pieces
 -- function for falling of pieces
 -- an "up next" location showing the upcoming block

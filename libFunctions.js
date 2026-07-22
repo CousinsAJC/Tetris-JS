@@ -35,4 +35,12 @@ function getGamepadInput(){
     return gp
 }
 
-export { drawLine, getGamepadInput };
+function getKeysInput(){
+    window.addEventListener('keydown', (event) => {
+        if (event.key === "a"){
+            current.rotateLeft();
+        }
+    });
+}
+
+export { drawLine, getGamepadInput, getKeysInput };

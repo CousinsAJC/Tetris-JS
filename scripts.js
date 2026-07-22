@@ -1,5 +1,12 @@
 import { i, j, l, o, s, t, z, generateBlock } from "./blocks.js";
-import { drawLine, getGamepadInput } from "./libFunctions.js";
+import { drawLine, getGamepadInput, getKeysInput } from "./libFunctions.js";
+import { StateMachine, BaseState } from "./stateMachine.js";
+import { MenuState } from "./states/menuState.js";
+import { OptionsState } from "./states/optionsState.js";
+import { PlayState } from "./states/playState.js";
+import { HighScore } from "./states/highScore.js";
+import { GameOver } from "./states/gameOver.js";
+
 
 // ----------------------------------------------------------------
 
@@ -20,12 +27,29 @@ let isRunning = false;
 const blockSize = 20;
 const gridLeft = 310;
 const gridTop = 100;
-const gridRight = gridLeft + blockSize * 10
-const gridBottom = gridTop + blockSize * 20
+const gridRight = gridLeft + blockSize * 10;
+const gridBottom = gridTop + blockSize * 20;
+const gridWidth = gridRight - gridLeft;
+const gridHeight = gridBottom - gridTop;
 
 // -- Block Setup
 const current = generateBlock();
 const next = generateBlock();
+
+let myKeys = {};
+let myPads = {};
+
+
+// -- Initialize state machine
+const gsm = new StateMachine({
+    menu: ()=> new MenuState(),
+    options: ()=> new OptionsState(),
+    play: ()=> new PlayState(),
+    gameOver: ()=> new GameOver(),
+    scores: ()=> new HighScore()
+});
+
+gsm.change('play');
 // -- Declare Variables
 
 // ----------------------------------------------------------------
@@ -40,13 +64,11 @@ gameLoop();
 
 // -- Every Frame Update/Draw
 function update(){
-    let gp = getGamepadInput();
-    inputLogic(gp);
+
 }
 
 function draw(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    drawGridToCanvas();
+    
 }
 // -- Every Frame Update/Draw
 
@@ -55,8 +77,12 @@ function draw(){
 // -- Define Functions
 function gameLoop(){
     if (isRunning){
-        update();
-        draw();
+        let gp = getGamepadInput();
+        inputLogic(gp);
+        gsm.update();
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        gsm.draw();
     }
     else {
         printToCenterScreen("Press Start to Begin", "green");
@@ -86,10 +112,11 @@ function drawGridToCanvas(){
     drawLine(gridLeft - 1, gridBottom + 1, gridLeft - 1, gridTop - 1);
 }
 
+
 function inputLogic(gp){
     if (gp[0]){
         if (gp.A.pressed){
-            console.log("A is being pressed");
+            myPads.push('a');
         }
     }
 }
@@ -115,4 +142,4 @@ let ps = 1
 
 
 
-export { context }
+export { context, drawGridToCanvas, current, myPads, myKeys, blockSize, gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight };
