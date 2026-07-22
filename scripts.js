@@ -10,6 +10,8 @@ import { GameOver } from "./states/gameOver.js";
 
 // ----------------------------------------------------------------
 
+
+
 // -- Get DOM Elements
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
@@ -36,8 +38,13 @@ const gridHeight = gridBottom - gridTop;
 const current = generateBlock();
 const next = generateBlock();
 
-let myKeys = {};
-let myPads = {};
+// -- Place inputs into arrays to be accessed by all states
+let myKeys = [];
+let myPads = [];
+
+document.addEventListener('keydown', (event =>{
+    myKeys.push(event.key);
+}))
 
 
 // -- Initialize state machine
@@ -62,15 +69,7 @@ gameLoop();
 
 // ----------------------------------------------------------------
 
-// -- Every Frame Update/Draw
-function update(){
 
-}
-
-function draw(){
-    
-}
-// -- Every Frame Update/Draw
 
 // ----------------------------------------------------------------
 
@@ -78,8 +77,10 @@ function draw(){
 function gameLoop(){
     if (isRunning){
         let gp = getGamepadInput();
-        inputLogic(gp);
+        inputToArray(gp);
         gsm.update();
+
+        myKeys = [];
 
         context.clearRect(0, 0, canvas.width, canvas.height);
         gsm.draw();
@@ -113,10 +114,11 @@ function drawGridToCanvas(){
 }
 
 
-function inputLogic(gp){
+function inputToArray(gp){
     if (gp[0]){
-        if (gp.A.pressed){
+        if (gp[0].A.pressed){
             myPads.push('a');
+            console.log("a pushed");
         }
     }
 }

@@ -7,7 +7,7 @@ class PlayState extends BaseState {
     }
 
     update(){
-
+        processPlayStateInput();
     }
 
     draw(){
@@ -23,6 +23,16 @@ function drawCurrentBlock(current){
     context.fillRect(current.x + current.coords[4]*blockSize, current.y + current.coords[5]*blockSize, blockSize, blockSize);
     context.fillRect(current.x + current.coords[6]*blockSize, current.y + current.coords[7]*blockSize, blockSize, blockSize);
     console.log("drawing current block");
+}
+
+
+function processPlayStateInput(){
+    if (myKeys.includes('a')){
+        current.rotateLeft();
+    }
+    if (myKeys.includes('d')){
+        current.rotateRight();
+    }
 }
 
 

@@ -39,6 +39,7 @@ function getKeysInput(){
     window.addEventListener('keydown', (event) => {
         if (event.key === "a"){
             current.rotateLeft();
+            console.log("rotate left");
         }
     });
 }
