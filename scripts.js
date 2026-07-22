@@ -1,5 +1,7 @@
 import { i, j, l, o, s, t, z, generateBlock } from "./blocks.js";
+import { drawLine, getGamepadInput } from "./libFunctions.js";
 
+// ----------------------------------------------------------------
 
 // -- Get DOM Elements
 const canvas = document.getElementById("game");
@@ -11,17 +13,22 @@ startButton.addEventListener('click', e=>{
 let isRunning = false;
 // -- Get DOM Elements
 
-
+// ----------------------------------------------------------------
 
 // -- Declare Variables
+// -- Grid/Square setup
 const blockSize = 20;
-const gridX = 310;
-const gridY = 100;
+const gridLeft = 310;
+const gridTop = 100;
+const gridRight = gridLeft + blockSize * 10
+const gridBottom = gridTop + blockSize * 20
+
+// -- Block Setup
 const current = generateBlock();
 const next = generateBlock();
 // -- Declare Variables
 
-
+// ----------------------------------------------------------------
 
 // -- Set game speed to ~ 60FPS & start game
 setInterval(gameLoop, 17);
@@ -29,28 +36,21 @@ setInterval(gameLoop, 17);
 gameLoop();
 // -- Set game speed to ~ 60FPS & start game
 
+// ----------------------------------------------------------------
 
 // -- Every Frame Update/Draw
 function update(){
-    //testUpdate();
     let gp = getGamepadInput();
     inputLogic(gp);
 }
 
 function draw(){
     context.clearRect(0, 0, canvas.width, canvas.height);
-    //testDraw();
     drawGridToCanvas();
 }
 // -- Every Frame Update/Draw
 
-
-
-
-
-
-
-
+// ----------------------------------------------------------------
 
 // -- Define Functions
 function gameLoop(){
@@ -61,9 +61,7 @@ function gameLoop(){
     else {
         printToCenterScreen("Press Start to Begin", "green");
     }
-
 }
-
 
 function printToCenterScreen(text, color){
     context.font = "36px Arial";
@@ -73,39 +71,19 @@ function printToCenterScreen(text, color){
 }
 
 function drawGridToCanvas(){
-    for (let i = 0; i < 10; i++){
-        for (let j = 0; j < 20; j++){
+    for (let i = 0; i < 9; i++){
+        for (let j = 0; j < 19; j++){
             context.fillStyle = "white";
-            context.fillRect(gridX + i * blockSize, gridY + j * blockSize, 1, 1)
+            context.fillRect(gridLeft + i * blockSize + blockSize, gridTop + j * blockSize + blockSize, 1, 1)
         }
     }
-}
 
-function getGamepadInput(){
-    const gp = navigator.getGamepads();
-    if (gp[0]){
-        gp.A = gp[0].buttons[0];
-        gp.B = gp[0].buttons[1];
-        gp.X = gp[0].buttons[3];
-        gp.Y = gp[0].buttons[4];
-        gp.LB = gp[0].buttons[6];
-        gp.RB = gp[0].buttons[7];
-        gp.LT = gp[0].axes[3];
-        gp.RT = gp[0].axes[4];
-
-        gp.LS = gp[0].buttons[13];
-        gp.RS = gp[0].buttons[14];
-        gp.SEL = gp[0].buttons[10];
-        gp.START = gp[0].buttons[11];
-
-        gp.LEFTX = gp[0].axes[0];
-        gp.LEFTY = gp[0].axes[1];
-        gp.RIGHTX = gp[0].axes[2];
-        gp.RIGHTY = gp[0].axes[5];
-
-        //console.log(gp.A);
-    }
-    return gp
+    context.strokeStyle = "white";
+    // -- Draw the border 1 pixel outside of the actual grid to avoid overlapping with blocks
+    drawLine(gridLeft - 1, gridTop - 1, gridRight + 1, gridTop -1);
+    drawLine(gridRight + 1, gridTop - 1, gridRight + 1, gridBottom + 1);
+    drawLine(gridRight + 1, gridBottom + 1, gridLeft - 1, gridBottom + 1);
+    drawLine(gridLeft - 1, gridBottom + 1, gridLeft - 1, gridTop - 1);
 }
 
 function inputLogic(gp){
@@ -114,29 +92,18 @@ function inputLogic(gp){
             console.log("A is being pressed");
         }
     }
-
 }
 // -- Define Functions
 
-
-
-
-
-
-
-
-
-
-
-
+// ----------------------------------------------------------------
 
 // -- Test Functions and Variables
-function testUpdate(){
+function testUpdate(){ // -- Move a blue box across the screen
     px = px + ps;
     py = px + ps;
 }
 
-function testDraw(){
+function testDraw(){ // -- Move a blue box across the screen
     context.fillStyle = "blue";
     context.fillRect(px, py, 10, 10);
 }
@@ -145,3 +112,7 @@ let px = 1
 let py = 1
 let ps = 1
 // -- Test Functions and Variables
+
+
+
+export { context }
