@@ -62,7 +62,8 @@ gsm.change('play');
 // ----------------------------------------------------------------
 
 // -- Set game speed to ~ 60FPS & start game
-setInterval(gameLoop, 17);
+const dt = 17;
+setInterval(gameLoop, dt);
 
 gameLoop();
 // -- Set game speed to ~ 60FPS & start game
@@ -144,4 +145,4 @@ let ps = 1
 
 
 
-export { context, drawGridToCanvas, current, myPads, myKeys, blockSize, gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight };
+export { context, drawGridToCanvas, current, myPads, myKeys, blockSize, gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt };

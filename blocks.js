@@ -1,7 +1,9 @@
-import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys } from "./scripts.js";
+import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt } from "./scripts.js";
 
 class block {
-    constructor(){
+    constructor(dt){
+        this.timer = 1250;
+        this.dropTimer = this.timer;
         this.pos = 1;
         this.pos1 = {};
         this.pos2 = {};
@@ -10,6 +12,14 @@ class block {
     }
 
     update(){
+        this.dropTimer = this.dropTimer - dt;
+        console.log(dt);
+        console.log(this.dropTimer);
+        if (this.dropTimer <= 0){
+            this.timedDrop();
+            this.dropTimer = this.timer;
+            console.log("drop current piece down");
+        }
         if (myKeys.includes('a')){
             this.rotateLeft();
         }
@@ -28,7 +38,7 @@ class block {
     }
 
 
-    
+
 
     rotateRight(){
         if (this.pos == 1) {
@@ -60,6 +70,10 @@ class block {
             this.pos = 3;
             this.coords = this.pos3;
         }
+    }
+
+    timedDrop(){
+            this.y = this.y + blockSize;
     }
 }
 
