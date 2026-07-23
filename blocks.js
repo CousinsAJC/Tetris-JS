@@ -1,24 +1,22 @@
-import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt } from "./scripts.js";
+import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom } from "./scripts.js";
 
 class block {
     constructor(dt){
-        this.timer = 1250;
+        this.timer = 250;
         this.dropTimer = this.timer;
         this.pos = 1;
-        this.pos1 = {};
-        this.pos2 = {};
-        this.pos3 = {};
-        this.pos4 = {};
+        this.ableToDrop = true;
+        this.pos1 = [];
+        this.pos2 = [];
+        this.pos3 = [];
+        this.pos4 = [];
     }
 
     update(){
         this.dropTimer = this.dropTimer - dt;
-        console.log(dt);
-        console.log(this.dropTimer);
         if (this.dropTimer <= 0){
             this.timedDrop();
             this.dropTimer = this.timer;
-            console.log("drop current piece down");
         }
         if (myKeys.includes('a')){
             this.rotateLeft();
@@ -35,6 +33,11 @@ class block {
         context.fillRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize);
         context.fillRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize);
         //console.log("drawing current block");
+        context.fillStyle = "white";
+        context.strokeRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize)
+        context.strokeRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize)
+        context.strokeRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize)
+        context.strokeRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize)
     }
 
 
@@ -73,7 +76,16 @@ class block {
     }
 
     timedDrop(){
+        for (i = 1; i < 8; i = i + 2){
+            if ((this.y + (this.pos1[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.pos2[i] * blockSize) + blockSize >= gridBottom) || 
+            (this.y + (this.pos3[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.pos4[i] * blockSize) + blockSize >= gridBottom)){
+                this.ableToDrop = false;
+            }
+        }
+        if (this.ableToDrop) {
             this.y = this.y + blockSize;
+            console.log("Drop current piece");
+        }
     }
 }
 
@@ -88,6 +100,7 @@ class i extends block {
         this.coords = this.pos1
         this.x = gridLeft + gridWidth/2  - blockSize * 2;
         this.y = gridTop - blockSize * 2;
+
     }
 }
 
