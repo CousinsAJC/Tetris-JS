@@ -34,9 +34,16 @@ const gridBottom = gridTop + blockSize * 20;
 const gridWidth = gridRight - gridLeft;
 const gridHeight = gridBottom - gridTop;
 
+const nextX = gridRight + (canvas.width - gridRight)/2 - (blockSize * 2);
+const nextY = canvas.height/2 - blockSize * 2;
+const nextWidth = blockSize * 4;
+const nextHeight = blockSize * 4;
+const nextTextX = nextX + blockSize * 2
+const nextTextY = nextY - blockSize * 2
+
 // -- Block Setup
-const current = generateBlock();
-const next = generateBlock();
+const current = generateBlock('current');
+const next = generateBlock('next');
 
 // -- Place inputs into arrays to be accessed by all states
 let myKeys = [];
@@ -63,6 +70,7 @@ gsm.change('play');
 
 // -- Set game speed to ~ 60FPS & start game
 const dt = 17;
+let level = 1;
 setInterval(gameLoop, dt);
 
 gameLoop();
@@ -145,4 +153,6 @@ let ps = 1
 
 
 
-export { context, drawGridToCanvas, current, myPads, myKeys, blockSize, gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt };
+export { context, drawGridToCanvas, current, myPads, myKeys, blockSize,
+     gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt,
+      level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY };
