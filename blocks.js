@@ -34,6 +34,9 @@ class block {
         if (myKeys.includes('ArrowRight')){
             this.moveRight();
         }
+        if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
+            this.moveDown();
+        }
     }
 
     draw(){
@@ -122,7 +125,10 @@ class block {
             if (this.x + (this.destinedCoords[i] * blockSize) < gridLeft){
                 return false;
             }
-            if ((this.x + (this.destinedCoords[i] * blockSize)) >= gridRight){
+            if (this.x + (this.destinedCoords[i] * blockSize) >= gridRight){
+                return false;
+            }
+            if (this.y + (this.destinedCoords[i] * blockSize) >= gridBottom){
                 return false;
             }
         }
@@ -132,8 +138,7 @@ class block {
     moveLeft(){
         this.ableToLeft = true;
         for(let i = 0; i < 7; i = i + 2){
-            if ((this.x + (this.coords[i] * blockSize) <= gridLeft) || (this.x + (this.coords[i] * blockSize) <= gridLeft) || 
-            (this.x + (this.coords[i] * blockSize) <= gridLeft) || (this.x + (this.coords[i] * blockSize) <= gridLeft)){
+            if (this.x + (this.coords[i] * blockSize) <= gridLeft){
                 this.ableToLeft = false;
             }
         }
@@ -145,24 +150,31 @@ class block {
     moveRight(){
         this.ableToRight = true;
         for(let i = 0; i < 7; i = i + 2){
-            if ((this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || 
-            (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight)){
+            if (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight){
                 this.ableToRight = false;
             }
         }
         if (this.ableToRight){
             this.x = this.x + blockSize;
         }
-        console.log("Left: " + this.ableToLeft)
-        console.log("Right: " + this.ableToRight)
-        console.log("Down: " + this.ableToDown)
+    }
+
+    moveDown(){
+        this.ableToDown = true;
+        for(let i = 1; i < 8; i = i + 2){
+            if (this.y + this.coords[i] * blockSize + blockSize >= gridBottom){
+                this.ableToDown = false;
+            }
+        }
+        if (this.ableToDown){
+            this.y = this.y + blockSize;
+        }
     }
 
     timedDrop(){
         this.ableToDown = true;
         for (let i = 1; i < 8; i = i + 2){
-            if ((this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || 
-            (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom)){
+            if (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom){
                 this.ableToDrop = false;
             }
         }
@@ -191,7 +203,7 @@ class i extends block {
 class j extends block {
     constructor(){
         super(block);
-        this.pos1 = [0, 1, 1, 1, 1, 2, 2, 2];
+        this.pos1 = [0, 1, 1, 1, 2, 1, 2, 2];
         this.pos2 = [0, 2, 1, 0, 1, 1, 1, 2];
         this.pos3 = [0, 0, 0, 1, 1, 1, 2, 1];
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
