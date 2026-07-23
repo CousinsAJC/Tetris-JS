@@ -1,11 +1,14 @@
-import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom } from "./scripts.js";
+import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom, gridRight } from "./scripts.js";
 
 class block {
     constructor(dt){
-        this.timer = 250;
+        this.timer = 1250;
         this.dropTimer = this.timer;
         this.pos = 1;
         this.ableToDrop = true;
+        this.ableToLeft = true;
+        this.ableToRight = true;
+        this.ableToDown = true;
         this.pos1 = [];
         this.pos2 = [];
         this.pos3 = [];
@@ -23,6 +26,12 @@ class block {
         }
         if (myKeys.includes('d')){
             this.rotateRight();
+        }
+        if (myKeys.includes('ArrowLeft')){
+            this.moveLeft();
+        }
+        if (myKeys.includes('ArrowRight')){
+            this.moveRight();
         }
     }
 
@@ -75,10 +84,40 @@ class block {
         }
     }
 
+    moveLeft(){
+        this.ableToLeft = true;
+        for(i = 0; i < 7; i = i + 2){
+            if ((this.x + (this.coords[i] * blockSize) <= gridLeft) || (this.x + (this.coords[i] * blockSize) <= gridLeft) || 
+            (this.x + (this.coords[i] * blockSize) <= gridLeft) || (this.x + (this.coords[i] * blockSize) <= gridLeft)){
+                this.ableToLeft = false;
+            }
+        }
+        if (this.ableToLeft){
+            this.x = this.x - blockSize;
+        }
+    }
+
+    moveRight(){
+        this.ableToRight = true;
+        for(i = 0; i < 7; i = i + 2){
+            if ((this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || 
+            (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight)){
+                this.ableToRight = false;
+            }
+        }
+        if (this.ableToRight){
+            this.x = this.x + blockSize;
+        }
+        console.log("Left: " + this.ableToLeft)
+        console.log("Right: " + this.ableToRight)
+        console.log("Down: " + this.ableToDown)
+    }
+
     timedDrop(){
+        this.ableToDown = true;
         for (i = 1; i < 8; i = i + 2){
-            if ((this.y + (this.pos1[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.pos2[i] * blockSize) + blockSize >= gridBottom) || 
-            (this.y + (this.pos3[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.pos4[i] * blockSize) + blockSize >= gridBottom)){
+            if ((this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || 
+            (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom)){
                 this.ableToDrop = false;
             }
         }

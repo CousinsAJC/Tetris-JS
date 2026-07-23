@@ -1,5 +1,5 @@
 import { i, j, l, o, s, t, z, generateBlock } from "./blocks.js";
-import { drawLine, getGamepadInput, getKeysInput } from "./libFunctions.js";
+import { drawLine, getGamepadInput } from "./libFunctions.js";
 import { StateMachine, BaseState } from "./stateMachine.js";
 import { MenuState } from "./states/menuState.js";
 import { OptionsState } from "./states/optionsState.js";
