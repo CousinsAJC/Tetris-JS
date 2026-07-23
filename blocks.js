@@ -1,8 +1,8 @@
 import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom, gridRight } from "./scripts.js";
 
 class block {
-    constructor(dt){
-        this.timer = 1250;
+    constructor(){
+        this.timer = 816;
         this.dropTimer = this.timer;
         this.pos = 1;
         this.ableToDrop = true;
@@ -22,21 +22,8 @@ class block {
             this.timedDrop();
             this.dropTimer = this.timer;
         }
-        if (myKeys.includes('a')){
-            this.rotateLeft();
-        }
-        if (myKeys.includes('d')){
-            this.rotateRight();
-        }
-        if (myKeys.includes('ArrowLeft')){
-            this.moveLeft();
-        }
-        if (myKeys.includes('ArrowRight')){
-            this.moveRight();
-        }
-        if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
-            this.moveDown();
-        }
+
+        this.keysInput();
     }
 
     draw(){
@@ -181,6 +168,24 @@ class block {
         if (this.ableToDrop) {
             this.y = this.y + blockSize;
             console.log("Drop current piece");
+        }
+    }
+
+    keysInput(){
+        if (myKeys.includes('a')){
+            this.rotateLeft();
+        }
+        if (myKeys.includes('d')){
+            this.rotateRight();
+        }
+        if (myKeys.includes('ArrowLeft')){
+            this.moveLeft();
+        }
+        if (myKeys.includes('ArrowRight')){
+            this.moveRight();
+        }
+        if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
+            this.moveDown();
         }
     }
 }
