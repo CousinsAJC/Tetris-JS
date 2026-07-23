@@ -9,6 +9,7 @@ class block {
         this.ableToLeft = true;
         this.ableToRight = true;
         this.ableToDown = true;
+        this.destinedCoords = [];
         this.pos1 = [];
         this.pos2 = [];
         this.pos3 = [];
@@ -47,6 +48,14 @@ class block {
         context.strokeRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize)
         context.strokeRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize)
         context.strokeRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize)
+
+        console.log(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize)
+        console.log(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize)
+        console.log(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize)
+        console.log(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize)
+        console.log("Left Grid: " + gridLeft);
+        console.log("Right Grid: " + gridRight);
+
     }
 
 
@@ -54,39 +63,75 @@ class block {
 
     rotateRight(){
         if (this.pos == 1) {
-            this.pos = 2;
-            this.coords = this.pos2;
+            this.destinedCoords = this.pos2;
+            if (this.readyToRotate()){
+                this.pos = 2;
+                this.coords = this.pos2;
+            }
         } else if (this.pos == 2) {
+            this.destinedCoords = this.pos3;
+            if(this.readyToRotate()){
             this.pos = 3;
             this.coords = this.pos3;
+            }
         } else if (this.pos == 3) {
-            this.pos = 4;
-            this.coords = this.pos4;
+            this.destinedCoords = this.pos4;
+            if(this.readyToRotate()){
+                this.pos = 4;
+                this.coords = this.pos4;
+            }
         } else if (this.pos == 4) {
-            this.pos = 1;
-            this.coords = this.pos1;
+            this.destinedCoords = this.pos1;
+            if (this.readyToRotate()){
+                this.pos = 1;
+                this.coords = this.pos1;
+            }
         }
     }
 
     rotateLeft(){
         if (this.pos == 1) {
-            this.pos = 4;
-            this.coords = this.pos4;
+            this.destinedCoords = this.pos4;
+            if (this.readyToRotate()){
+                this.pos = 4;
+                this.coords = this.pos4;
+            }
         } else if (this.pos == 2) {
+            this.destinedCoords = this.pos1;
+            if(this.readyToRotate()){
             this.pos = 1;
             this.coords = this.pos1;
+            }
         } else if (this.pos == 3) {
-            this.pos = 2;
-            this.coords = this.pos2;
+            this.destinedCoords = this.pos2;
+            if(this.readyToRotate()){
+                this.pos = 2;
+                this.coords = this.pos2;
+            }
         } else if (this.pos == 4) {
-            this.pos = 3;
-            this.coords = this.pos3;
+            this.destinedCoords = this.pos3;
+            if (this.readyToRotate()){
+                this.pos = 3;
+                this.coords = this.pos3;
+            }
         }
+    }
+
+    readyToRotate(){
+        for (let i = 0; i <= 6; i = i + 2){
+            if (this.x + (this.destinedCoords[i] * blockSize) < gridLeft){
+                return false;
+            }
+            if ((this.x + (this.destinedCoords[i] * blockSize)) >= gridRight){
+                return false;
+            }
+        }
+        return true;
     }
 
     moveLeft(){
         this.ableToLeft = true;
-        for(i = 0; i < 7; i = i + 2){
+        for(let i = 0; i < 7; i = i + 2){
             if ((this.x + (this.coords[i] * blockSize) <= gridLeft) || (this.x + (this.coords[i] * blockSize) <= gridLeft) || 
             (this.x + (this.coords[i] * blockSize) <= gridLeft) || (this.x + (this.coords[i] * blockSize) <= gridLeft)){
                 this.ableToLeft = false;
@@ -99,7 +144,7 @@ class block {
 
     moveRight(){
         this.ableToRight = true;
-        for(i = 0; i < 7; i = i + 2){
+        for(let i = 0; i < 7; i = i + 2){
             if ((this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || 
             (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight) || (this.x + (this.coords[i] * blockSize) + blockSize >= gridRight)){
                 this.ableToRight = false;
@@ -115,7 +160,7 @@ class block {
 
     timedDrop(){
         this.ableToDown = true;
-        for (i = 1; i < 8; i = i + 2){
+        for (let i = 1; i < 8; i = i + 2){
             if ((this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || 
             (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom) || (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom)){
                 this.ableToDrop = false;
@@ -146,8 +191,8 @@ class i extends block {
 class j extends block {
     constructor(){
         super(block);
-        this.pos1 = [1, 0, 1, 1, 1, 2, 2, 2];
-        this.pos2 = [2, 0, 2, 1, 1, 1, 1, 0];
+        this.pos1 = [0, 1, 1, 1, 1, 2, 2, 2];
+        this.pos2 = [0, 2, 1, 0, 1, 1, 1, 2];
         this.pos3 = [0, 0, 0, 1, 1, 1, 2, 1];
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
         this.color = "blue";
