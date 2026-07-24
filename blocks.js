@@ -30,26 +30,25 @@ class block {
     }
 
     draw(){
+        // Draw block
         context.fillStyle = this.color;
         context.fillRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize);
         context.fillRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize);
         context.fillRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize);
         context.fillRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize);
-        //console.log("drawing current block");
+        
+        // Draw block border
         context.fillStyle = "white";
         context.strokeRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize)
         context.strokeRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize)
         context.strokeRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize)
         context.strokeRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize)
 
-        console.log(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize)
-        console.log(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize)
-        console.log(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize)
-        console.log(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize)
-        console.log("Left Grid: " + gridLeft);
-        console.log("Right Grid: " + gridRight);
+        // printBlockBoundsTest()  //  Prints block positions and grid bounds to screen for checking errors
 
     }
+
+
 
 
 
@@ -112,13 +111,18 @@ class block {
 
     readyToRotate(){
         for (let i = 0; i <= 6; i = i + 2){
-            if (this.x + (this.destinedCoords[i] * blockSize) < gridLeft){
+            let checkSpot = this.x + (this.destinedCoords[i] * blockSize);
+            
+            if (checkSpot < gridLeft){
+                console.log("Unable to rotate to desired position.")
                 return false;
             }
-            if (this.x + (this.destinedCoords[i] * blockSize) >= gridRight){
+            if (checkSpot >= gridRight){
+                console.log("Unable to rotate to desired position")
                 return false;
             }
-            if (this.y + (this.destinedCoords[i] * blockSize) >= gridBottom){
+            if (checkSpot >= gridBottom){
+                console.log("Unable to rotate to desired position")
                 return false;
             }
         }
@@ -170,7 +174,6 @@ class block {
         }
         if (this.ableToDrop) {
             this.y = this.y + blockSize;
-            console.log("Drop current piece");
         }
     }
 
@@ -190,6 +193,17 @@ class block {
         if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
             this.moveDown();
         }
+    }
+
+
+    // -- Tests
+    printBlockBoundsTest(){
+        console.log(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize)
+        console.log(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize)
+        console.log(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize)
+        console.log(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize)
+        console.log("Left Grid: " + gridLeft);
+        console.log("Right Grid: " + gridRight); 
     }
 }
 

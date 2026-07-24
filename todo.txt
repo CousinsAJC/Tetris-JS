@@ -4,7 +4,7 @@
     --start new game
     --options
     --high score?
--- an "up next" location showing the upcoming block
+
 -- function to lock block into place
 -- keep score
     --40 for 1 line, 100 for 2 lines, 300 for 3 lines, 1200 for 4 lines
@@ -15,8 +15,6 @@
     --gain 1 level every 10 lines
 -- speed up upon leveling up
 
---
-
 
 
 --DONE--
@@ -25,3 +23,4 @@
 -- 60 fps
 -- function for rotation of pieces
 -- function for falling of pieces
+-- an "up next" location showing the upcoming block
