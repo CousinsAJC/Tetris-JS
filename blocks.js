@@ -26,19 +26,13 @@ class block {
     }
 
     update(){
-        if (this.isCurrent){
-            this.dropTimer = this.dropTimer - dt;
-            if (this.dropTimer <= 0){
-                this.timedDrop();
-                this.dropTimer = this.timer;
-            }
-            this.keysInput();
+        this.dropTimer = this.dropTimer - dt;
+        if (this.dropTimer <= 0){
+            this.timedDrop();
+            this.dropTimer = this.timer;
         }
 
-        if (this.isNext) {
-            // Wait to be replaced and transition to current
-        }
-
+        this.keysInput();
     }
 
     draw(){
@@ -214,16 +208,8 @@ class i extends block {
         this.pos4 = [2, 0, 2, 1, 2, 2, 2, 3];
         this.color = "cyan";
         this.coords = this.pos1
-
-        if (this.isCurrent){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop - blockSize * 2;
-        }
-
-        if (this.isNext){
-            
-        }
-        
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize * 2;
 
     }
 }
@@ -237,11 +223,8 @@ class j extends block {
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
         this.color = "blue";
         this.coords = this.pos1
-
-        if (this.isCurrent){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
-        }
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop;
     }
 }
 
@@ -254,11 +237,8 @@ class l extends block {
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 2];
         this.color = "orange";
         this.coords = this.pos1
-
-        if (this.isCurrent){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop - blockSize;
-        }
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 
@@ -271,11 +251,8 @@ class o extends block {
         this.pos4 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.color = "yellow";
         this.coords = this.pos1
-
-        if (this.isCurrent){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop - blockSize;
-        }
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop - blockSize;
     }
 }
 
