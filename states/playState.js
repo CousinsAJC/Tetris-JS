@@ -1,5 +1,5 @@
 import { BaseState } from "../stateMachine.js";
-import { drawGridToCanvas, current, myPads, myKeys, context, blockSize, dt,
+import { drawGridToCanvas, current, next, myPads, myKeys, context, blockSize, dt,
     nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY } from "../scripts.js";
 
 
@@ -19,6 +19,7 @@ class PlayState extends BaseState {
         drawGridToCanvas();
         current.draw();
         drawNextBox(nextX, nextY, nextWidth, nextHeight);
+        next.draw();
     }
 }
 

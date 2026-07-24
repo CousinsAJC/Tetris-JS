@@ -42,8 +42,10 @@ const nextTextX = nextX + blockSize * 2
 const nextTextY = nextY - blockSize * 2
 
 // -- Block Setup
-const current = generateBlock('current');
-const next = generateBlock('next');
+let blockArray = [];
+let filledSquares = [ [], [], [], [], [], [], [], [], [], [] ];  //each inner array represents a column in the grid.
+let current = generateBlock(true);
+let next = generateBlock(false);
 
 // -- Place inputs into arrays to be accessed by all states
 let myKeys = [];
@@ -153,6 +155,6 @@ let ps = 1
 
 
 
-export { context, drawGridToCanvas, current, myPads, myKeys, blockSize,
+export { context, drawGridToCanvas, current, next, myPads, myKeys, blockSize,
      gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt,
       level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY };

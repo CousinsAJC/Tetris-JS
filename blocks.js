@@ -1,7 +1,9 @@
-import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom, gridRight, level } from "./scripts.js";
+import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom, gridRight, level, nextX, nextY } from "./scripts.js";
+
+
 
 class block {
-    constructor(type){
+    constructor(c){
         this.dropSpeed = [48, 43, 38, 33, 28, 23, 18, 13, 8, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
         this.timer = this.dropSpeed[0] * 17
         this.dropTimer = this.timer;
@@ -15,14 +17,6 @@ class block {
         this.pos2 = [];
         this.pos3 = [];
         this.pos4 = [];
-
-        if (type == 'current') {
-            this.isCurrent = true;
-            this.isNext = false;
-        } else if (type == 'next') {
-            this.isCurrent = false;
-            this.isNext = true;
-        }
     }
 
     update(){
@@ -200,7 +194,7 @@ class block {
 }
 
 class i extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [0, 2, 1, 2, 2, 2, 3, 2];
         this.pos2 = [2, 0, 2, 1, 2, 2, 2, 3];
@@ -208,14 +202,18 @@ class i extends block {
         this.pos4 = [2, 0, 2, 1, 2, 2, 2, 3];
         this.color = "cyan";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop - blockSize * 2;
-
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop - blockSize * 2;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 class j extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [0, 1, 1, 1, 2, 1, 2, 2];
         this.pos2 = [0, 2, 1, 0, 1, 1, 1, 2];
@@ -223,13 +221,18 @@ class j extends block {
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
         this.color = "blue";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop;
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 class l extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [0, 1, 1, 1, 2, 1, 0, 2];
         this.pos2 = [0, 0, 1, 0, 1, 1, 1, 2];
@@ -237,13 +240,18 @@ class l extends block {
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 2];
         this.color = "orange";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop - blockSize;
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 class o extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.pos2 = [1, 1, 2, 1, 1, 2, 2, 2];
@@ -251,13 +259,18 @@ class o extends block {
         this.pos4 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.color = "yellow";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop - blockSize;
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 class s extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [0, 2, 1, 2, 1, 1, 2, 1];
         this.pos2 = [1, 0, 1, 1, 2, 1, 2, 2];
@@ -265,13 +278,18 @@ class s extends block {
         this.pos4 = [1, 0, 1, 1, 2, 1, 2, 2];
         this.color = "green";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop - blockSize;
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 class t extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [0, 1, 1, 1, 2, 1, 1, 2];
         this.pos2 = [0, 1, 1, 1, 1, 0, 1, 2];
@@ -279,13 +297,18 @@ class t extends block {
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 1];
         this.color = "purple";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop - blockSize;
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 class z extends block {
-    constructor(){
+    constructor(c){
         super(block);
         this.pos1 = [0, 1, 1, 1, 1, 2, 2, 2];
         this.pos2 = [2, 0, 2, 1, 1, 1, 1, 2];
@@ -293,37 +316,42 @@ class z extends block {
         this.pos4 = [2, 0, 2, 1, 1, 1, 1, 2];
         this.color = "red";
         this.coords = this.pos1
-        this.x = gridLeft + gridWidth/2  - blockSize * 2;
-        this.y = gridTop - blockSize;
+        if (c){
+            this.x = gridLeft + gridWidth/2  - blockSize * 2;
+            this.y = gridTop;
+        } else {
+            this.x = nextX;
+            this.y = nextY;
+        }
     }
 }
 
 
-function generateBlock(){
+function generateBlock(c){
     let int = Math.floor(Math.random() * 7) + 1;
     let instance = null;
 
     switch (int){
         case 1:
-            instance = new i();
+            instance = new i(c);
             break;
         case 2:
-            instance = new j();
+            instance = new j(c);
             break;
         case 3:
-            instance = new l();
+            instance = new l(c);
             break;
         case 4:
-            instance = new o();
+            instance = new o(c);
             break;
         case 5:
-            instance = new s();
+            instance = new s(c);
             break;
         case 6:
-            instance = new t();
+            instance = new t(c);
             break;
         case 7:
-            instance = new z();
+            instance = new z(c);
             break;
         default:
             console.log("An error occured when creating new block");
