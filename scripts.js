@@ -153,8 +153,18 @@ let py = 1
 let ps = 1
 // -- Test Functions and Variables
 
+export function addCurrentToArray(){
+    blockArray.push(current);
+}
 
+export function setCurrentBlock(newBlock){
+    current = newBlock;
+}
+
+export function setNextBlock(newBlock){
+    next = newBlock;
+}
 
 export { context, drawGridToCanvas, current, next, myPads, myKeys, blockSize,
      gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt,
-      level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY };
+      level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray };

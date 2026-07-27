@@ -1,11 +1,12 @@
 --TODO--
 ------------------------------------------------------------------------------------
+
+--check for locked block positions
+
 -- create splash screen when loading game
     --start new game
     --options
     --high score?
-
--- function to lock block into place
 -- keep score
     --40 for 1 line, 100 for 2 lines, 300 for 3 lines, 1200 for 4 lines
     --above multiplied by level
@@ -24,3 +25,4 @@
 -- function for rotation of pieces
 -- function for falling of pieces
 -- an "up next" location showing the upcoming block
+-- function to lock block into place

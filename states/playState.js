@@ -1,6 +1,9 @@
 import { BaseState } from "../stateMachine.js";
 import { drawGridToCanvas, current, next, myPads, myKeys, context, blockSize, dt,
-    nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY } from "../scripts.js";
+    nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray,
+    setCurrentBlock,
+    setNextBlock} from "../scripts.js";
+import { generateBlock } from "../blocks.js";
 
 
 
@@ -13,6 +16,11 @@ class PlayState extends BaseState {
 
     update(){
         current.update(dt);
+        if (current.ableToDrop == false){
+            setCurrentBlock(next);
+            current.currentStartLocation();
+            setNextBlock(generateBlock(false));
+        }
     }
 
     draw(){
@@ -20,6 +28,9 @@ class PlayState extends BaseState {
         current.draw();
         drawNextBox(nextX, nextY, nextWidth, nextHeight);
         next.draw();
+        for (let i = 0; i < blockArray.length; i++){
+            blockArray[i].draw();
+        }
     }
 }
 

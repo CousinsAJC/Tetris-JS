@@ -1,4 +1,6 @@
-import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, gridBottom, gridRight, level, nextX, nextY } from "./scripts.js";
+import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, 
+    gridBottom, gridRight, level, nextX, nextY, current, next, addCurrentToArray,
+    blockArray } from "./scripts.js";
 
 
 
@@ -17,6 +19,7 @@ class block {
         this.pos2 = [];
         this.pos3 = [];
         this.pos4 = [];
+        this.c = c;
     }
 
     update(){
@@ -25,6 +28,10 @@ class block {
             this.timedDrop();
             this.dropTimer = this.timer;
         }
+        
+        this.lockPiece();
+        
+        
 
         this.keysInput();
     }
@@ -49,7 +56,18 @@ class block {
     }
 
 
+    currentStartLocation(){
+        this.x = gridLeft + gridWidth/2  - blockSize * 2;
+        this.y = gridTop;
+    }
 
+    lockPiece(){
+        if(this.ableToDrop == false){
+            addCurrentToArray();
+            //this.color = "white";
+            this.c = false;
+        }
+    }
 
 
 
@@ -216,9 +234,9 @@ class i extends block {
         this.pos4 = [2, 0, 2, 1, 2, 2, 2, 3];
         this.color = "cyan";
         this.coords = this.pos1
+        this.type = "i";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop - blockSize * 2;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
@@ -235,9 +253,9 @@ class j extends block {
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
         this.color = "blue";
         this.coords = this.pos1
+        this.type = "j";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
@@ -254,9 +272,9 @@ class l extends block {
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 2];
         this.color = "orange";
         this.coords = this.pos1
+        this.type = "l";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
@@ -273,9 +291,9 @@ class o extends block {
         this.pos4 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.color = "yellow";
         this.coords = this.pos1
+        this.type = "o";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
@@ -292,9 +310,9 @@ class s extends block {
         this.pos4 = [1, 0, 1, 1, 2, 1, 2, 2];
         this.color = "green";
         this.coords = this.pos1
+        this.type = "s";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
@@ -311,9 +329,9 @@ class t extends block {
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 1];
         this.color = "purple";
         this.coords = this.pos1
+        this.type = "t";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
@@ -330,9 +348,9 @@ class z extends block {
         this.pos4 = [2, 0, 2, 1, 1, 1, 1, 2];
         this.color = "red";
         this.coords = this.pos1
+        this.type = "z";
         if (c){
-            this.x = gridLeft + gridWidth/2  - blockSize * 2;
-            this.y = gridTop;
+            this.currentStartLocation()
         } else {
             this.x = nextX;
             this.y = nextY;
