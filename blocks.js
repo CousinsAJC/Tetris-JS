@@ -15,10 +15,7 @@ class block {
         this.ableToRight = true;
         this.ableToDown = true;
         this.destinedCoords = [];
-        this.pos1 = [];
-        this.pos2 = [];
-        this.pos3 = [];
-        this.pos4 = [];
+        this.trueCoords = [];
         this.c = c;
     }
 
@@ -31,8 +28,7 @@ class block {
         
         this.lockPiece();
         
-        
-
+    
         this.keysInput();
     }
 
@@ -174,7 +170,7 @@ class block {
     moveDown(){
         this.ableToDown = true;
         for(let i = 1; i < 8; i = i + 2){
-            if (this.y + this.coords[i] * blockSize + blockSize >= gridBottom){
+            if (this.trueCoords[i] + blockSize >= gridBottom){
                 this.ableToDown = false;
             }
         }
@@ -214,6 +210,15 @@ class block {
     }
 
 
+    getTrueCoords(pos){
+        this.coords = pos;
+        for (let i = 0; i < 7; i = i + 2){
+            this.trueCoords[i] = this.x + pos[i] * blockSize;
+            this.trueCoords[i+1] = this.y + pos[i+1] * blockSize;
+        }
+    }
+
+
     // -- Tests
     printBlockBoundsTest(){
         console.log(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize)
@@ -233,7 +238,7 @@ class i extends block {
         this.pos3 = [0, 2, 1, 2, 2, 2, 3, 2];
         this.pos4 = [2, 0, 2, 1, 2, 2, 2, 3];
         this.color = "cyan";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "i";
         if (c){
             this.currentStartLocation()
@@ -252,7 +257,7 @@ class j extends block {
         this.pos3 = [0, 0, 0, 1, 1, 1, 2, 1];
         this.pos4 = [1, 0, 2, 0, 1, 1, 1, 2];  
         this.color = "blue";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "j";
         if (c){
             this.currentStartLocation()
@@ -271,7 +276,7 @@ class l extends block {
         this.pos3 = [0, 1, 1, 1, 2, 1, 2, 0];
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 2];
         this.color = "orange";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "l";
         if (c){
             this.currentStartLocation()
@@ -290,7 +295,7 @@ class o extends block {
         this.pos3 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.pos4 = [1, 1, 2, 1, 1, 2, 2, 2];
         this.color = "yellow";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "o";
         if (c){
             this.currentStartLocation()
@@ -309,7 +314,7 @@ class s extends block {
         this.pos3 = [0, 2, 1, 2, 1, 1, 2, 1];
         this.pos4 = [1, 0, 1, 1, 2, 1, 2, 2];
         this.color = "green";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "s";
         if (c){
             this.currentStartLocation()
@@ -328,7 +333,7 @@ class t extends block {
         this.pos3 = [1, 0, 0, 1, 1, 1, 2, 1];
         this.pos4 = [1, 0, 1, 1, 1, 2, 2, 1];
         this.color = "purple";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "t";
         if (c){
             this.currentStartLocation()
@@ -347,7 +352,7 @@ class z extends block {
         this.pos3 = [0, 1, 1, 1, 1, 2, 2, 2];
         this.pos4 = [2, 0, 2, 1, 1, 1, 1, 2];
         this.color = "red";
-        this.coords = this.pos1
+        this.getTrueCoords(this.pos1);
         this.type = "z";
         if (c){
             this.currentStartLocation()

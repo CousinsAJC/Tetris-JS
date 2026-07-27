@@ -51,9 +51,9 @@ let next = generateBlock(false);
 let myKeys = [];
 let myPads = [];
 
-document.addEventListener('keydown', (event =>{
+document.addEventListener('keydown', (event) =>{
     myKeys.push(event.key);
-}))
+});
 
 
 // -- Initialize state machine
