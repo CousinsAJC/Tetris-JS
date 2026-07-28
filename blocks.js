@@ -20,7 +20,9 @@ class block {
     }
 
     update(){
+
         this.dropTimer = this.dropTimer - dt;
+
         if (this.dropTimer <= 0){
             this.timedDrop();
             this.dropTimer = this.timer;
@@ -64,6 +66,11 @@ class block {
         }
     }
 
+
+
+    checkArrayLocations(){
+
+    }
 
 
     rotateRight(){

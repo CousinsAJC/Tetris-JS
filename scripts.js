@@ -154,7 +154,16 @@ let ps = 1
 // -- Test Functions and Variables
 
 export function addCurrentToArray(){
-    blockArray.push(current);
+    let instance = [];
+    instance = [current.trueCoords[0], current.trueCoords[1], current.color];
+    blockArray.push(instance);
+    instance = [current.trueCoords[2], current.trueCoords[3],current.color];
+    blockArray.push(instance);
+    instance = [current.trueCoords[4], current.trueCoords[5], current.color];
+    blockArray.push(instance);
+    instance = [current.trueCoords[6], current.trueCoords[7], current.color];
+    blockArray.push(instance);
+    console.log(blockArray);
 }
 
 export function setCurrentBlock(newBlock){
