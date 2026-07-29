@@ -166,6 +166,12 @@ export function addCurrentToArray(){
     console.log(blockArray);
 }
 
+export function isEmpty(coords){
+    for (let i = 0; blockArray.length; i++){
+        
+    }
+}
+
 export function setCurrentBlock(newBlock){
     current = newBlock;
 }

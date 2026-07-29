@@ -1,6 +1,6 @@
 import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, 
     gridBottom, gridRight, level, nextX, nextY, current, next, addCurrentToArray,
-    blockArray } from "./scripts.js";
+    blockArray, checkArray } from "./scripts.js";
 
 
 
@@ -20,6 +20,7 @@ class block {
     }
 
     update(){
+        this.keysInput();
 
         this.dropTimer = this.dropTimer - dt;
 
@@ -28,9 +29,10 @@ class block {
             this.dropTimer = this.timer;
         }
         
-        this.lockPiece();
-        
-        this.keysInput();
+        if (!this.ableToDrop){
+            this.getTrueCoords(this.coords);
+            this.lockPiece();
+        }
     }
 
     draw(){
@@ -49,7 +51,6 @@ class block {
         context.strokeRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize)
 
         // printBlockBoundsTest()  //  Prints block positions and grid bounds to screen for checking errors
-
     }
 
 
@@ -59,23 +60,15 @@ class block {
     }
 
     lockPiece(){
-        if(this.ableToDrop == false){
-            addCurrentToArray();
-            //this.color = "white";
-            this.c = false;
-        }
+        addCurrentToArray();
+        this.c = false;
     }
-
-
-
-    checkArrayLocations(){
-
-    }
-
 
     rotateRight(){
+        let isEmpty = null;
         if (this.pos == 1) {
             this.destinedCoords = this.pos2;
+            isEmpty = checkArray(this.destinedCoords);
             if (this.readyToRotate()){
                 this.pos = 2;
                 this.coords = this.pos2;
@@ -222,8 +215,6 @@ class block {
             this.trueCoords[i] = this.x + pos[i] * blockSize;
             this.trueCoords[i+1] = this.y + pos[i+1] * blockSize;
         }
-        console.log(this.coords);
-        console.log(this.trueCoords[0]);
     }
 
 

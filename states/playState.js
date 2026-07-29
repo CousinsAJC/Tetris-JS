@@ -18,6 +18,7 @@ class PlayState extends BaseState {
 
         current.update();
         if (current.ableToDrop == false){
+            //current.lockPiece();
             setCurrentBlock(next);
             current.currentStartLocation();
             setNextBlock(generateBlock(false));
@@ -32,6 +33,9 @@ class PlayState extends BaseState {
         for (let i = 0; i < blockArray.length; i++){
             context.fillStyle = blockArray[i][2];
             context.fillRect(blockArray[i][0], blockArray[i][1], blockSize, blockSize);
+
+            context.fillStyle = "white";
+            context.strokeRect(blockArray[i][0], blockArray[i][1], blockSize, blockSize);
         }
     }
 }
