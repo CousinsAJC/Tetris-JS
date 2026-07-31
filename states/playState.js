@@ -15,7 +15,6 @@ class PlayState extends BaseState {
     }
 
     update(){
-
         current.update();
         if (current.ableToDrop == false){
             //current.lockPiece();

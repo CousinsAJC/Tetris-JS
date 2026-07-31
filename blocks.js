@@ -20,6 +20,7 @@ class block {
     }
 
     update(){
+        this.getTrueCoords(this.coords);
         this.keysInput();
 
         this.dropTimer = this.dropTimer - dt;
@@ -36,21 +37,8 @@ class block {
     }
 
     draw(){
-        // Draw block
-        context.fillStyle = this.color;
-        context.fillRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize);
-        context.fillRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize);
-        context.fillRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize);
-        context.fillRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize);
-        
-        // Draw block border
-        context.fillStyle = "white";
-        context.strokeRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize)
-        context.strokeRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize)
-        context.strokeRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize)
-        context.strokeRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize)
-
-        // printBlockBoundsTest()  //  Prints block positions and grid bounds to screen for checking errors
+        this.drawBlock();
+        this.drawBorder();
     }
 
 
@@ -68,28 +56,28 @@ class block {
         let isEmpty = null;
         if (this.pos == 1) {
             this.destinedCoords = this.pos2;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
                 this.pos = 2;
                 this.coords = this.pos2;
             }
         } else if (this.pos == 2) {
             this.destinedCoords = this.pos3;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
             this.pos = 3;
             this.coords = this.pos3;
             }
         } else if (this.pos == 3) {
             this.destinedCoords = this.pos4;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
                 this.pos = 4;
                 this.coords = this.pos4;
             }
         } else if (this.pos == 4) {
             this.destinedCoords = this.pos1;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
                 this.pos = 1;
                 this.coords = this.pos1;
@@ -101,28 +89,28 @@ class block {
         let isEmpty = null;
         if (this.pos == 1) {
             this.destinedCoords = this.pos4;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
                 this.pos = 4;
                 this.coords = this.pos4;
             }
         } else if (this.pos == 2) {
             this.destinedCoords = this.pos1;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
             this.pos = 1;
             this.coords = this.pos1;
             }
         } else if (this.pos == 3) {
             this.destinedCoords = this.pos2;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
                 this.pos = 2;
                 this.coords = this.pos2;
             }
         } else if (this.pos == 4) {
             this.destinedCoords = this.pos3;
-            isEmpty = checkArray(this.destinedCoords);
+            isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
                 this.pos = 3;
                 this.coords = this.pos3;
@@ -152,10 +140,16 @@ class block {
 
     moveLeft(){
         this.ableToLeft = true;
-        for(let i = 0; i < 7; i = i + 2){
+        for (let i = 0; i < 7; i = i + 2){
+            // compare coords to grid boundary left side
             if (this.x + (this.coords[i] * blockSize) <= gridLeft){
                 this.ableToLeft = false;
+                break;
             }
+        }
+
+        if(this.ableToLeft){
+            this.ableToLeft = checkArray(this.coords, 'left');
         }
         if (this.ableToLeft){
             this.x = this.x - blockSize;
@@ -169,6 +163,10 @@ class block {
                 this.ableToRight = false;
             }
         }
+
+        if(this.ableToRight){
+            this.ableToRight = checkArray(this.coords, 'right');
+        }
         if (this.ableToRight){
             this.x = this.x + blockSize;
         }
@@ -180,6 +178,10 @@ class block {
             if (this.y + (this.coords[i] * blockSize) + blockSize >= gridBottom){
                 this.ableToDown = false;
             }
+        }
+
+        if(this.ableToDown){
+            this.ableToDown = checkArray(this.coords, 'down');
         }
         if (this.ableToDown){
             this.y = this.y + blockSize;
@@ -193,28 +195,16 @@ class block {
                 this.ableToDrop = false;
             }
         }
+
+        if(this.ableToDrop){
+            this.ableToDrop = checkArray(this.coords, 'down');
+        }
         if (this.ableToDrop) {
             this.y = this.y + blockSize;
         }
     }
 
-    keysInput(){
-        if (myKeys.includes('a')){
-            this.rotateLeft();
-        }
-        if (myKeys.includes('d')){
-            this.rotateRight();
-        }
-        if (myKeys.includes('ArrowLeft')){
-            this.moveLeft();
-        }
-        if (myKeys.includes('ArrowRight')){
-            this.moveRight();
-        }
-        if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
-            this.moveDown();
-        }
-    }
+
 
 
     getTrueCoords(pos){
@@ -234,6 +224,42 @@ class block {
         console.log(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize)
         console.log("Left Grid: " + gridLeft);
         console.log("Right Grid: " + gridRight); 
+    }
+
+    drawBlock(){
+        // Draw block
+        context.fillStyle = this.color;
+        context.fillRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize);
+        context.fillRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize);
+        context.fillRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize);
+        context.fillRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize);
+    }
+
+    drawBorder(){
+        // Draw block border
+        context.fillStyle = "white";
+        context.strokeRect(this.x + this.coords[0]*blockSize, this.y + this.coords[1]*blockSize, blockSize, blockSize)
+        context.strokeRect(this.x + this.coords[2]*blockSize, this.y + this.coords[3]*blockSize, blockSize, blockSize)
+        context.strokeRect(this.x + this.coords[4]*blockSize, this.y + this.coords[5]*blockSize, blockSize, blockSize)
+        context.strokeRect(this.x + this.coords[6]*blockSize, this.y + this.coords[7]*blockSize, blockSize, blockSize)
+    }
+
+    keysInput(){
+        if (myKeys.includes('a')){
+            this.rotateLeft();
+        }
+        if (myKeys.includes('d')){
+            this.rotateRight();
+        }
+        if (myKeys.includes('ArrowLeft')){
+            this.moveLeft();
+        }
+        if (myKeys.includes('ArrowRight')){
+            this.moveRight();
+        }
+        if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
+            this.moveDown();
+        }
     }
 }
 

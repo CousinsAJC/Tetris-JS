@@ -163,19 +163,35 @@ export function addCurrentToArray(){
     blockArray.push(instance);
     instance = [current.trueCoords[6], current.trueCoords[7], current.color];
     blockArray.push(instance);
-    console.log(blockArray);
+    //console.log(blockArray);
 }
 
-export function checkArray(coords){
+export function checkArray(coords, dir){  // This function converts relative coordinates to actual coordinates then compares to the block array.
     for (let i = 0; i < blockArray.length; i++){
         for (let j = 0; j < 7; j = j + 2){
-            if ((current.x + (coords[j] * blockSize) == blockArray[i][0]) && (current.y + (coords[j+1] * blockSize) == blockArray[i][1])){
-                return false;
+            if (dir == 'rotate'){
+                if ((current.x + (coords[j] * blockSize) == blockArray[i][0]) && (current.y + (coords[j+1] * blockSize) == blockArray[i][1])){
+                    return false;
+                }
+            } else if (dir == 'left'){
+                if ((current.x - blockSize) + (coords[j] * blockSize) == blockArray[i][0] && (current.y + (coords[j+1] * blockSize) == blockArray[i][1])){
+                    return false;
+                }
+            } else if (dir == 'right'){
+                if ((current.x + blockSize) + (coords[j] * blockSize) == blockArray[i][0] && (current.y + (coords[j+1] * blockSize) == blockArray[i][1])){
+                    return false;
+                }
+            } else if (dir == 'down'){
+                if (current.x + (coords[j] * blockSize) == blockArray[i][0] && ((current.y + blockSize) + (coords[j+1] * blockSize) == blockArray[i][1])){
+                    return false;
+                }
             }
+            
         }
     }
     return true;
 }
+
 
 export function setCurrentBlock(newBlock){
     current = newBlock;
