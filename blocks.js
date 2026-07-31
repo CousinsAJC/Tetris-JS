@@ -1,6 +1,6 @@
 import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, 
     gridBottom, gridRight, level, nextX, nextY, current, next, addCurrentToArray,
-    blockArray, checkArray } from "./scripts.js";
+    blockArray, checkArray, flashLine } from "./scripts.js";
 
 
 
@@ -9,6 +9,8 @@ class block {
         this.dropSpeed = [48, 43, 38, 33, 28, 23, 18, 13, 8, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
         this.timer = this.dropSpeed[level - 1] * 17
         this.dropTimer = this.timer;
+        //this.paused = false;
+        //this.pausedTimer = 3 * 17;
         this.pos = 1;
         this.ableToDown = true;
         this.ableToDrop = true;
@@ -23,6 +25,16 @@ class block {
         this.getTrueCoords(this.coords);
         this.keysInput();
 
+        /*
+        if(this.paused){
+            this.pausedTimer = this.pausedTimer - dt;
+            if (this.pausedTimer <= 0){
+                this.paused = false;
+                this.pausedTimer = 3 *dt;
+            }
+        } else {
+
+            */
         this.dropTimer = this.dropTimer - dt;
 
         if (this.dropTimer <= 0){

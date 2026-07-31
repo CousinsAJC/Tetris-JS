@@ -1,28 +1,41 @@
 import { BaseState } from "../stateMachine.js";
 import { drawGridToCanvas, current, next, myPads, myKeys, context, blockSize, dt,
     nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray,
-    setCurrentBlock, setNextBlock, checkForTetris, score} from "../scripts.js";
+    setCurrentBlock, setNextBlock, checkForTetris, score,
+    deleteLines, dropLinesPostTetris, flashLine} from "../scripts.js";
 import { generateBlock } from "../blocks.js";
 
-
-
-
+let flash = true;
+let lines = [];
+let paused = false;
+let pausedTimer = 5 * 17;
 
 class PlayState extends BaseState {
     enter(params){
-
     }
 
     update(){
-        current.update();
-        if (current.ableToDrop == false){
-            //current.lockPiece();
-            setCurrentBlock(next);
-            current.currentStartLocation();
-            setNextBlock(generateBlock(false));
+        if (paused == false){
+            current.update();
+            if (current.ableToDrop == false){
+                setCurrentBlock(next);
+                current.currentStartLocation();
+                setNextBlock(generateBlock(false));
+            }
+            lines = checkForTetris();
+            if (lines.length > 0){
+                paused = deleteLines(lines);
+            }
+            dropLinesPostTetris(lines);
+            console.log('paused = ' + paused);
+            console.log('timer = ' + pausedTimer);
+        } else {
+            pausedTimer = pausedTimer - dt;
+            if (pausedTimer <= 0){
+                pausedTimer = 5 * 17;
+                paused = false;
+            }
         }
-        checkForTetris();
-
     }
 
     draw(){
@@ -36,6 +49,10 @@ class PlayState extends BaseState {
 
             context.fillStyle = "white";
             context.strokeRect(blockArray[i][0], blockArray[i][1], blockSize, blockSize);
+        }
+
+        if (paused == true){
+            flash = flashLine(lines, flash);
         }
 
         drawScore();
@@ -59,4 +76,4 @@ function drawScore(){
 
 
 
-export { PlayState };
+export { PlayState, flash, lines };

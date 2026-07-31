@@ -3,7 +3,7 @@ import { drawLine, getGamepadInput } from "./libFunctions.js";
 import { StateMachine, BaseState } from "./stateMachine.js";
 import { MenuState } from "./states/menuState.js";
 import { OptionsState } from "./states/optionsState.js";
-import { PlayState } from "./states/playState.js";
+import { PlayState, lines, flash } from "./states/playState.js";
 import { HighScore } from "./states/highScore.js";
 import { GameOver } from "./states/gameOver.js";
 
@@ -231,8 +231,7 @@ export function checkForTetris(){
         clearedLines = 0;
         level++;
     }
-
-    deleteLines(linesToDelete);
+    return(linesToDelete);
 }
 
 export function deleteLines(arr){
@@ -244,7 +243,7 @@ export function deleteLines(arr){
             }
         }
     }
-    dropLinesPostTetris(arr)
+    return true;
 }
 
 export function dropLinesPostTetris(arr){
@@ -257,6 +256,27 @@ export function dropLinesPostTetris(arr){
             }
         }
     }
+}
+
+export function flashLine(arr, on){
+    for ( let i = 0; i < arr.length; i ++){
+        for (let j = gridLeft; j < gridRight; j = j + blockSize){
+            if (on){
+                context.fillStyle = "white";
+            } else {
+                context.fillStyle = "black";
+            }
+            context.fillRect(j, arr[i], blockSize, blockSize)
+        }
+    }
+
+    if (on){
+        on = false
+    } else {
+        on = true
+    }
+
+    return on;
 }
 
 
