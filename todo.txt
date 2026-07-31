@@ -1,20 +1,16 @@
 --TODO--
 ------------------------------------------------------------------------------------
 
---check for locked block positions
 
+-- sfx and vfx for movement, clearing lines, etc.
 -- create splash screen when loading game
     --start new game
     --options
     --high score?
--- keep score
-    --40 for 1 line, 100 for 2 lines, 300 for 3 lines, 1200 for 4 lines
-    --above multiplied by level
--- function for clearing a line
--- behavior for blocks after a line clear (falling to lowest available space)
--- level up system  
-    --gain 1 level every 10 lines
--- speed up upon leveling up
+
+
+
+
 
 
 
@@ -26,3 +22,12 @@
 -- function for falling of pieces
 -- an "up next" location showing the upcoming block
 -- function to lock block into place
+--check for locked block positions
+-- keep score
+    --40 for 1 line, 100 for 2 lines, 300 for 3 lines, 1200 for 4 lines
+    --above multiplied by level
+-- function for clearing a line
+-- level up system  
+    --gain 1 level every 10 lines
+-- speed up upon leveling up
+-- behavior for blocks after a line clear (falling to lowest available space)
