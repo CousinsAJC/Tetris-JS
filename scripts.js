@@ -244,6 +244,11 @@ export function deleteLines(arr){
             }
         }
     }
+    dropLinesPostTetris(arr)
+}
+
+export function dropLinesPostTetris(arr){
+
 }
 
 
