@@ -166,10 +166,15 @@ export function addCurrentToArray(){
     console.log(blockArray);
 }
 
-export function isEmpty(coords){
-    for (let i = 0; blockArray.length; i++){
-        
+export function checkArray(coords){
+    for (let i = 0; i < blockArray.length; i++){
+        for (let j = 0; j < 7; j = j + 2){
+            if ((current.x + (coords[j] * blockSize) == blockArray[i][0]) && (current.y + (coords[j+1] * blockSize) == blockArray[i][1])){
+                return false;
+            }
+        }
     }
+    return true;
 }
 
 export function setCurrentBlock(newBlock){
@@ -181,5 +186,5 @@ export function setNextBlock(newBlock){
 }
 
 export { context, drawGridToCanvas, current, next, myPads, myKeys, blockSize,
-     gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt,
-      level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray };
+    gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt,
+    level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray};

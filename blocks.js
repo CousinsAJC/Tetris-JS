@@ -69,25 +69,28 @@ class block {
         if (this.pos == 1) {
             this.destinedCoords = this.pos2;
             isEmpty = checkArray(this.destinedCoords);
-            if (this.readyToRotate()){
+            if (this.readyToRotate() && isEmpty == true){
                 this.pos = 2;
                 this.coords = this.pos2;
             }
         } else if (this.pos == 2) {
             this.destinedCoords = this.pos3;
-            if(this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if(this.readyToRotate() && isEmpty == true){
             this.pos = 3;
             this.coords = this.pos3;
             }
         } else if (this.pos == 3) {
             this.destinedCoords = this.pos4;
-            if(this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if(this.readyToRotate() && isEmpty == true){
                 this.pos = 4;
                 this.coords = this.pos4;
             }
         } else if (this.pos == 4) {
             this.destinedCoords = this.pos1;
-            if (this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if (this.readyToRotate() && isEmpty == true){
                 this.pos = 1;
                 this.coords = this.pos1;
             }
@@ -95,27 +98,32 @@ class block {
     }
 
     rotateLeft(){
+        let isEmpty = null;
         if (this.pos == 1) {
             this.destinedCoords = this.pos4;
-            if (this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if (this.readyToRotate() && isEmpty == true){
                 this.pos = 4;
                 this.coords = this.pos4;
             }
         } else if (this.pos == 2) {
             this.destinedCoords = this.pos1;
-            if(this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if(this.readyToRotate() && isEmpty == true){
             this.pos = 1;
             this.coords = this.pos1;
             }
         } else if (this.pos == 3) {
             this.destinedCoords = this.pos2;
-            if(this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if(this.readyToRotate() && isEmpty == true){
                 this.pos = 2;
                 this.coords = this.pos2;
             }
         } else if (this.pos == 4) {
             this.destinedCoords = this.pos3;
-            if (this.readyToRotate()){
+            isEmpty = checkArray(this.destinedCoords);
+            if (this.readyToRotate() && isEmpty == true){
                 this.pos = 3;
                 this.coords = this.pos3;
             }
