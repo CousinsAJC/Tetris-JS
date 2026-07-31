@@ -236,8 +236,8 @@ export function checkForTetris(){
 
 export function deleteLines(arr){
     blockArray.sort((a, b) => a[1] - b[1]);
-    for (let i = blockArray.length - 1; i >= 0; i--){
-        for (let j = arr.length - 1; j >= 0; j--){
+    for (let j = arr.length - 1; j >= 0; j--){
+        for (let i = blockArray.length - 1; i >= 0; i--){
             if (arr[j] == blockArray[i][1]){
                 blockArray.splice(i, 1);
             }
@@ -249,8 +249,8 @@ export function deleteLines(arr){
 export function dropLinesPostTetris(arr){
     blockArray.sort((a, b) => a[1] - b[1]);
     arr.sort((a, b) => a - b);
-    for (let i = blockArray.length - 1; i >= 0; i--){
-        for (let j = arr.length - 1; j >= 0; j--){
+    for (let j = arr.length - 1; j >= 0; j--){
+        for (let i = blockArray.length - 1; i >= 0; i--){
             if (blockArray[i][1] < arr[j]){
                 blockArray[i][1] = blockArray[i][1] + blockSize;
             }
