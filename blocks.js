@@ -7,7 +7,7 @@ import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt,
 class block {
     constructor(c){
         this.dropSpeed = [48, 43, 38, 33, 28, 23, 18, 13, 8, 6, 5, 5, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
-        this.timer = this.dropSpeed[0] * 17
+        this.timer = this.dropSpeed[level - 1] * 17
         this.dropTimer = this.timer;
         this.pos = 1;
         this.ableToDown = true;

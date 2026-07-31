@@ -1,8 +1,7 @@
 import { BaseState } from "../stateMachine.js";
 import { drawGridToCanvas, current, next, myPads, myKeys, context, blockSize, dt,
     nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray,
-    setCurrentBlock,
-    setNextBlock} from "../scripts.js";
+    setCurrentBlock, setNextBlock, checkForTetris, score} from "../scripts.js";
 import { generateBlock } from "../blocks.js";
 
 
@@ -22,6 +21,8 @@ class PlayState extends BaseState {
             current.currentStartLocation();
             setNextBlock(generateBlock(false));
         }
+        checkForTetris();
+
     }
 
     draw(){
@@ -36,6 +37,8 @@ class PlayState extends BaseState {
             context.fillStyle = "white";
             context.strokeRect(blockArray[i][0], blockArray[i][1], blockSize, blockSize);
         }
+
+        drawScore();
     }
 }
 
@@ -44,6 +47,12 @@ function drawNextBox(x, y, w, h){
     context.fillStyle = "white";
     context.fillText("Next", nextTextX, nextTextY)
     context.strokeRect(x, y, w, h);
+}
+
+function drawScore(){
+    context.font = "24px Arial"
+    context.fillStyle = 'green';
+    context.fillText(score, 150, 150);
 }
 
 

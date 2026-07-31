@@ -25,6 +25,14 @@ let isRunning = false;
 // ----------------------------------------------------------------
 
 // -- Declare Variables
+let score = 0;
+let single = 40;
+let double = 100;
+let triple = 300;
+let quad = 1200;
+let level = 1;
+let clearedLines = 0;
+
 // -- Grid/Square setup
 const blockSize = 20;
 const gridLeft = 310;
@@ -51,6 +59,9 @@ let next = generateBlock(false);
 let myKeys = [];
 let myPads = [];
 
+
+
+
 document.addEventListener('keydown', (event) =>{
     myKeys.push(event.key);
 });
@@ -72,7 +83,6 @@ gsm.change('play');
 
 // -- Set game speed to ~ 60FPS & start game
 const dt = 17;
-let level = 1;
 setInterval(gameLoop, dt);
 
 gameLoop();
@@ -192,6 +202,50 @@ export function checkArray(coords, dir){  // This function converts relative coo
     return true;
 }
 
+export function checkForTetris(){
+    let linesToDelete = [];
+    for (let i = gridBottom - blockSize; i >= gridTop; i = i - blockSize){
+        let count = 0;
+        for (let j = blockArray.length - 1; j >= 0; j--){
+            if (blockArray[j][1] == i){
+                count++;
+            }
+        }
+        if (count == 10){
+            console.log('tetris!  -  ' + i);
+            linesToDelete.push(i);
+        }
+    }
+    if (linesToDelete.length == 1){
+        score = score + single * level;
+    } else if (linesToDelete.length == 2){
+        score = score + double * level;
+    } else if (linesToDelete.length == 3){
+        score = score + triple * level;
+    } else if (linesToDelete.length == 4){
+        score = score + quad * level;
+    }
+
+    clearedLines = clearedLines + linesToDelete.length;
+    if (clearedLines >= 10){
+        clearedLines = 0;
+        level++;
+    }
+
+    deleteLines(linesToDelete);
+}
+
+export function deleteLines(arr){
+    blockArray.sort((a, b) => b[1] - a[1]);
+    for (let i = blockArray.length - 1; i >= 0; i--){
+        for (let j = arr.length - 1; j >= 0; j--){
+            if (arr[j] == blockArray[i][1]){
+                blockArray.splice(i, 1);
+            }
+        }
+    }
+}
+
 
 export function setCurrentBlock(newBlock){
     current = newBlock;
@@ -202,5 +256,5 @@ export function setNextBlock(newBlock){
 }
 
 export { context, drawGridToCanvas, current, next, myPads, myKeys, blockSize,
-    gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt,
+    gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt, score,
     level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray};
