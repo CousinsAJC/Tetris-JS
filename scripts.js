@@ -139,29 +139,11 @@ function inputToArray(gp){
     if (gp[0]){
         if (gp[0].A.pressed){
             myPads.push('a');
-            console.log("a pushed");
         }
     }
 }
 // -- Define Functions
 
-// ----------------------------------------------------------------
-
-// -- Test Functions and Variables
-function testUpdate(){ // -- Move a blue box across the screen
-    px = px + ps;
-    py = px + ps;
-}
-
-function testDraw(){ // -- Move a blue box across the screen
-    context.fillStyle = "blue";
-    context.fillRect(px, py, 10, 10);
-}
-
-let px = 1
-let py = 1
-let ps = 1
-// -- Test Functions and Variables
 
 export function addCurrentToArray(){
     let instance = [];
@@ -173,7 +155,6 @@ export function addCurrentToArray(){
     blockArray.push(instance);
     instance = [current.trueCoords[6], current.trueCoords[7], current.color];
     blockArray.push(instance);
-    //console.log(blockArray);
 }
 
 export function checkArray(coords, dir){  // This function converts relative coordinates to actual coordinates then compares to the block array.
@@ -247,10 +228,10 @@ export function deleteLines(arr){
 }
 
 export function dropLinesPostTetris(arr){
-    blockArray.sort((a, b) => a[1] - b[1]);
-    arr.sort((a, b) => a - b);
+    //blockArray.sort((a, b) => a[1] - b[1]);
+    //arr.sort((a, b) => a - b);
     for (let j = arr.length - 1; j >= 0; j--){
-        for (let i = blockArray.length - 1; i >= 0; i--){
+        for (let i = 0; i < blockArray.length; i++){
             if (blockArray[i][1] < arr[j]){
                 blockArray[i][1] = blockArray[i][1] + blockSize;
             }
