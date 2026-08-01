@@ -8,6 +8,7 @@ import { HighScore } from "./states/highScore.js";
 import { GameOver } from "./states/gameOver.js";
 
 
+
 // ----------------------------------------------------------------
 
 
@@ -60,8 +61,6 @@ let myKeys = [];
 let myPads = [];
 
 
-
-
 document.addEventListener('keydown', (event) =>{
     myKeys.push(event.key);
 });
@@ -97,11 +96,11 @@ gameLoop();
 // -- Define Functions
 function gameLoop(){
     if (isRunning){
-        let gp = getGamepadInput();
-        inputToArray(gp);
+        getGamepadInput();
         gsm.update();
 
         myKeys = [];
+        myPads = [];
 
         context.clearRect(0, 0, canvas.width, canvas.height);
         gsm.draw();
@@ -135,13 +134,7 @@ function drawGridToCanvas(){
 }
 
 
-function inputToArray(gp){
-    if (gp[0]){
-        if (gp[0].A.pressed){
-            myPads.push('a');
-        }
-    }
-}
+
 // -- Define Functions
 
 

@@ -1,6 +1,8 @@
 import { blockSize, context, gridWidth, gridLeft, gridTop, myKeys, dt, 
     gridBottom, gridRight, level, nextX, nextY, current, next, addCurrentToArray,
-    blockArray, checkArray, flashLine } from "./scripts.js";
+    blockArray, checkArray, flashLine, 
+    myPads} from "./scripts.js";
+import { getGamepadInput } from "./libFunctions.js";
 
 
 
@@ -22,6 +24,8 @@ class block {
     update(){
         this.getTrueCoords(this.coords);
         this.keysInput();
+        this.padsInput();
+        
 
         this.dropTimer = this.dropTimer - dt;
 
@@ -259,6 +263,15 @@ class block {
         }
         if (myKeys.includes('s') || myKeys.includes('ArrowDown')){
             this.moveDown();
+        }
+    }
+
+    padsInput(){
+        if (myPads.includes('x')){
+            this.rotateRight();
+        }
+        if (myPads.includes('a')){
+            this.rotateLeft();
         }
     }
 }
