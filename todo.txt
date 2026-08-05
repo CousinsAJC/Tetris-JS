@@ -7,6 +7,10 @@
     --start new game
     --options
     --high score?
+-- conditions for game over
+-- display level to screen
+-- visual and music indicator for level increasing/speed increasing
+
 
 
 
