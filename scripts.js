@@ -263,5 +263,5 @@ export function setNextBlock(newBlock){
 }
 
 export { context, drawGridToCanvas, current, next, myPads, myKeys, blockSize,
-    gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt, score,
+    gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt, score, canvas,
     level, nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray};

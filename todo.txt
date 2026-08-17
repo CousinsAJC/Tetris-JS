@@ -6,12 +6,13 @@
 -- create splash screen when loading game
     --start new game
     --options
-    --high score?
 -- conditions for game over
 -- display level to screen
 -- visual and music indicator for level increasing/speed increasing
-
-
+-- fix game controller issue for single down press versus multiple.
+-- report bug button for players to report bugs.  Comment box that sends a direct email.
+-- high scrore : personal high score that saves between plays.
+    -- Advanced : high score from all players that gets sent to server and updates.
 
 
 

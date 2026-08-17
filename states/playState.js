@@ -1,7 +1,7 @@
 import { BaseState } from "../stateMachine.js";
 import { drawGridToCanvas, current, next, myPads, myKeys, context, blockSize, dt,
     nextX, nextY, nextWidth, nextHeight, nextTextX, nextTextY, blockArray,
-    setCurrentBlock, setNextBlock, checkForTetris, score,
+    setCurrentBlock, setNextBlock, checkForTetris, score, level, canvas,
     deleteLines, dropLinesPostTetris, flashLine} from "../scripts.js";
 import { generateBlock } from "../blocks.js";
 
@@ -56,6 +56,7 @@ class PlayState extends BaseState {
         }
 
         drawScore();
+        drawLevel();
     }
 }
 
@@ -70,6 +71,12 @@ function drawScore(){
     context.font = "24px Arial"
     context.fillStyle = 'green';
     context.fillText(score, 150, 150);
+}
+
+function drawLevel(){
+    context.font = "36px Arial";
+    context.fillStyle = 'white';
+    context.fillText(level, canvas.width / 2, 50);
 }
 
 
