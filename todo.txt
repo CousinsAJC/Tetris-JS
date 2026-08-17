@@ -3,6 +3,7 @@
 
 
 -- sfx and vfx for movement, clearing lines, etc.
+    --fix click sound to be louder and to cut off and start new if currently playing.
 -- create splash screen when loading game
     --start new game
     --options
