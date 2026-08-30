@@ -8,10 +8,9 @@
     --start new game
     --options
 -- conditions for game over
--- display level to screen
 -- visual and music indicator for level increasing/speed increasing
 -- fix game controller issue for single down press versus multiple.
--- report bug button for players to report bugs.  Comment box that sends a direct email.
+-- Comment box that sends a direct email when report bugs button pressed.
 -- high scrore : personal high score that saves between plays.
     -- Advanced : high score from all players that gets sent to server and updates.
 -- if down is pressed when at bottom/at lowest point then lock in place.
@@ -37,3 +36,5 @@
     --gain 1 level every 10 lines
 -- speed up upon leveling up
 -- behavior for blocks after a line clear (falling to lowest available space)
+-- display level to screen
+-- report bug button for players to report bugs.

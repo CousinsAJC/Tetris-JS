@@ -3,7 +3,7 @@
     border: 2px solid #888888;
 }
 
-#start-button, #feedback-button{
+#start-button, #feedback-button, #report-bugs{
     background-color: antiquewhite;
     border-radius: 10px;
     height: 40px;

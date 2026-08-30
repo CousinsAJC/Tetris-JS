@@ -16,8 +16,13 @@ const context = canvas.getContext("2d");
 const startButton = document.getElementById("start-button");
 startButton.addEventListener('click', e=>{
     isRunning = true;
-})
+});
 let isRunning = false;
+
+const reportBug = document.getElementById("report-bugs");
+reportBug.addEventListener('click', e=>{
+
+});
 // ----------------------------------------------------------------
 
 
