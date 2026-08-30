@@ -6,9 +6,6 @@ import { OptionsState } from "./states/optionsState.js";
 import { PlayState, lines, flash } from "./states/playState.js";
 import { HighScore } from "./states/highScore.js";
 import { GameOver } from "./states/gameOver.js";
-
-
-
 // ----------------------------------------------------------------
 
 
@@ -21,11 +18,13 @@ startButton.addEventListener('click', e=>{
     isRunning = true;
 })
 let isRunning = false;
-// -- Get DOM Elements
-
 // ----------------------------------------------------------------
 
+
+
+
 // -- Declare Variables
+// ----------------------------------------------------------------
 let score = 0;
 let single = 40;
 let double = 100;
@@ -76,24 +75,24 @@ const gsm = new StateMachine({
 });
 
 gsm.change('play');
-// -- Declare Variables
-
 // ----------------------------------------------------------------
+
+
 
 // -- Set game speed to ~ 60FPS & start game
 const dt = 17;
 setInterval(gameLoop, dt);
 
 gameLoop();
-// -- Set game speed to ~ 60FPS & start game
-
 // ----------------------------------------------------------------
 
 
 
-// ----------------------------------------------------------------
+
+
 
 // -- Define Functions
+// ----------------------------------------------------------------
 function gameLoop(){
     if (isRunning){
         getGamepadInput();
@@ -110,6 +109,8 @@ function gameLoop(){
     }
 }
 
+// ----------------------------------------------------------------
+// -- Drawing and Printing to Screen
 function printToCenterScreen(text, color){
     context.font = "36px Arial";
     context.fillStyle = color;
@@ -132,12 +133,13 @@ function drawGridToCanvas(){
     drawLine(gridRight + 1, gridBottom + 1, gridLeft - 1, gridBottom + 1);
     drawLine(gridLeft - 1, gridBottom + 1, gridLeft - 1, gridTop - 1);
 }
+// ----------------------------------------------------------------
 
 
 
-// -- Define Functions
 
-
+// -- Functions Related to Block Array
+// ----------------------------------------------------------------
 export function addCurrentToArray(){
     let instance = [];
     instance = [current.trueCoords[0], current.trueCoords[1], current.color];
@@ -252,7 +254,13 @@ export function flashLine(arr, on){
 
     return on;
 }
+// ----------------------------------------------------------------
 
+
+
+
+// -- Input Related
+// ----------------------------------------------------------------
 
 export function setCurrentBlock(newBlock){
     current = newBlock;
@@ -261,6 +269,10 @@ export function setCurrentBlock(newBlock){
 export function setNextBlock(newBlock){
     next = newBlock;
 }
+// ----------------------------------------------------------------
+
+
+
 
 export { context, drawGridToCanvas, current, next, myPads, myKeys, blockSize,
     gridLeft, gridRight, gridBottom, gridTop, gridWidth, gridHeight, dt, score, canvas,

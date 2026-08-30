@@ -14,7 +14,7 @@
 -- report bug button for players to report bugs.  Comment box that sends a direct email.
 -- high scrore : personal high score that saves between plays.
     -- Advanced : high score from all players that gets sent to server and updates.
-
+-- if down is pressed when at bottom/at lowest point then lock in place.
 
 
 
