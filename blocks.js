@@ -19,8 +19,18 @@ class block {
         this.destinedCoords = [];
         this.trueCoords = [];
         this.c = c;
-        this.click = new Audio("./click.mp3");
-        this.click.volume = 1;
+        this.pop = new Audio("./popping.wav");
+        this.pop.volume = 1;
+        this.popStart = .1;
+        this.pop.currentTime = this.popStart;
+
+        this.click = new Audio("./clicking.wav");
+        this.click.volume = .35;
+        this.clickStart = 0;
+        this.click.currentTime = this.clickStart;
+
+        this.rotationSound = this.click;
+        this.lockinSound = this.pop;
     }
 
     update(){
@@ -64,6 +74,8 @@ class block {
             this.destinedCoords = this.pos2;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 2;
                 this.coords = this.pos2;
@@ -72,14 +84,18 @@ class block {
             this.destinedCoords = this.pos3;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
-            this.click.play();
-            this.pos = 3;
-            this.coords = this.pos3;
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
+                this.click.play();
+                this.pos = 3;
+                this.coords = this.pos3;
             }
         } else if (this.pos == 3) {
             this.destinedCoords = this.pos4;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 4;
                 this.coords = this.pos4;
@@ -88,6 +104,8 @@ class block {
             this.destinedCoords = this.pos1;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 1;
                 this.coords = this.pos1;
@@ -101,6 +119,8 @@ class block {
             this.destinedCoords = this.pos4;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 4;
                 this.coords = this.pos4;
@@ -109,6 +129,8 @@ class block {
             this.destinedCoords = this.pos1;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 1;
                 this.coords = this.pos1;
@@ -117,6 +139,8 @@ class block {
             this.destinedCoords = this.pos2;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if(this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 2;
                 this.coords = this.pos2;
@@ -125,6 +149,8 @@ class block {
             this.destinedCoords = this.pos3;
             isEmpty = checkArray(this.destinedCoords, 'rotate');
             if (this.readyToRotate() && isEmpty == true){
+                this.click.pause;
+                this.click.currentTime = this.clickStart;
                 this.click.play();
                 this.pos = 3;
                 this.coords = this.pos3;
