@@ -65,6 +65,10 @@ let myKeys = [];
 let myPads = [];
 
 
+let popAudio = new Audio('./popping.wav');
+popAudio.volume = 1;
+
+
 document.addEventListener('keydown', (event) =>{
     myKeys.push(event.key);
 });
@@ -199,12 +203,16 @@ export function checkForTetris(){
     }
     if (linesToDelete.length == 1){
         score = score + single * level;
+        playPopAudio();
     } else if (linesToDelete.length == 2){
         score = score + double * level;
+        playPopAudio();
     } else if (linesToDelete.length == 3){
         score = score + triple * level;
+        playPopAudio();
     } else if (linesToDelete.length == 4){
         score = score + quad * level;
+        playPopAudio();
     }
 
     clearedLines = clearedLines + linesToDelete.length;
@@ -276,6 +284,15 @@ export function setNextBlock(newBlock){
 }
 // ----------------------------------------------------------------
 
+
+// -- SFX
+// ----------------------------------------------------------------
+export function playPopAudio(){
+    popAudio.pause();
+    popAudio.currentTime = 0.1;
+    popAudio.play();
+}
+// ----------------------------------------------------------------
 
 
 

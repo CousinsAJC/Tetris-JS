@@ -25,7 +25,7 @@ class block {
         this.pop.currentTime = this.popStart;
 
         this.click = new Audio("./clicking.wav");
-        this.click.volume = .35;
+        this.click.volume = .20;
         this.clickStart = 0;
         this.click.currentTime = this.clickStart;
 
@@ -309,10 +309,6 @@ class block {
         if (myPads.includes('a')){
             this.rotateLeft();
         }
-    }
-
-    playClick(){
-
     }
 }
 
