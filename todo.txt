@@ -1,8 +1,6 @@
 --TODO--
 ------------------------------------------------------------------------------------
 
-
-
 -- create splash screen when loading game
     --start new game
     --options
